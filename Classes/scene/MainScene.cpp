@@ -47,6 +47,7 @@ void MainScene::enableTouches() {
 
 void MainScene::onTouchesBegan(const std::vector<Touch*> touches, Event* event) {
 	Touch* touch = touches.front();
+	// 2 touches only
 	if (touch->getID() < 2) {
 		mTouchState->touchDown();
 	}
@@ -54,6 +55,7 @@ void MainScene::onTouchesBegan(const std::vector<Touch*> touches, Event* event) 
 
 void MainScene::onTouchesEnded(const std::vector<Touch*> touches, Event* event) {
 	Touch* touch = touches.front();
+	// 2 touches only
 	if (touch->getID() < 2) {
 		mTouchState->touchUp();
 	}

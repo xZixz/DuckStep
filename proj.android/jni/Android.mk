@@ -13,6 +13,9 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/HelloWorldScene.cpp \
+                   ../../Classes/model/tile/DTile.cpp \
+                   ../../Classes/model/tile/BadTile.cpp \
+                   ../../Classes/model/tile/GoodTile.cpp \
                    ../../Classes/scene/MainScene.cpp \
                    ../../Classes/state/TouchState.cpp \
                    ../../Classes/state/NoneTouchState.cpp \
