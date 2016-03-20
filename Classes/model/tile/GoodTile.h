@@ -14,6 +14,7 @@ class GoodTile : public DTile {
 public:
 
 	static GoodTile* create();
+	virtual bool init();
 
 	GoodTile();
 	virtual ~GoodTile();

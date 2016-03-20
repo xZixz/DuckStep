@@ -15,12 +15,10 @@ USING_NS_CC;
 class DTile : public Sprite {
 public:
 
-	enum {
+	enum TileType {
 		BAD_TILE,
 		GOOD_TILE
 	};
-
-	static DTile* createTile(int tileType);
 
 	DTile();
 	virtual ~DTile();

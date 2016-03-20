@@ -14,6 +14,7 @@ class BadTile : public DTile {
 public:
 
 	static BadTile* create();
+	virtual bool init();
 
 	BadTile();
 	virtual ~BadTile();

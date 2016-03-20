@@ -7,7 +7,14 @@
 
 #include "MainScene.h"
 
+#include "../model/tile/DTile.h"
+#include "../model/tile/DTileFactory.h"
 #include "../state/NoneTouchState.h"
+#include "../Constants.h"
+#include "../Utils.h"
+
+#define TILE_HEIGHT 30
+#define TILE_WIDTH 30
 
 Scene* MainScene::createScene() {
 	auto scene = Scene::create();
@@ -26,11 +33,24 @@ MainScene* MainScene::create() {
 }
 
 bool MainScene::init() {
-	if (Layer::init()) {
+	if (LayerColor::initWithColor(Color4B(222,215,197,255))) {
+
+		// initialization
 		enableTouches();
+		mScreenSize = Director::getInstance()->getWinSize();
+		mBaseGameNode = Node::create();
+		addChild(mBaseGameNode);
+
+		mTouchCountLabel = Label::createWithTTF(DUtils::to_string(mTouchCount), "fonts/Marker Felt.ttf", 24);
+		mTouchCountLabel->setPosition(mScreenSize / 2);
+		addChild(mTouchCountLabel);
+
+		srand(time(nullptr));
 
 		// Initialize touch state
 		mTouchState = new NoneTouchState(this);
+
+		generateTiles();
 
 		return true;
 	}
@@ -66,11 +86,33 @@ void MainScene::setTouchState(TouchState* touchState) {
 }
 
 void MainScene::onSingleTouch() {
+	// regenerate tiles
+
+	mBaseGameNode->removeAllChildren();
+	mLastTileCreatedIndex = 0;
+	generateTiles();
+	mTouchCount++;
+	mTouchCountLabel->setString(DUtils::to_string(mTouchCount));
+
 	log("SINGLE");
 }
 
 void MainScene::onDoubleTouch() {
 	log("DOUBLE");
+}
+
+void MainScene::generateTiles() {
+	// TODO
+	std::vector<DTile::TileType> tileTypes = DTileFactory::generateTileSet(24);
+	for (DTile::TileType tileType : tileTypes) {
+		DTile* aTile = DTileFactory::createTile(tileType);
+		Vec2 pos;
+		pos.x = mScreenSize.width / 2 + ((mLastTileCreatedIndex % COLUMN_NUM) - (float)COLUMN_NUM / 2) * TILE_WIDTH;
+		pos.y = (mLastTileCreatedIndex / COLUMN_NUM + 0.5f) * TILE_HEIGHT;
+		aTile->setPosition(pos);
+		mBaseGameNode->addChild(aTile);
+		mLastTileCreatedIndex ++;
+	}
 }
 
 MainScene::MainScene():

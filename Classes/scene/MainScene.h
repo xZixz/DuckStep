@@ -13,7 +13,7 @@
 
 USING_NS_CC;
 
-class MainScene : public Layer {
+class MainScene : public LayerColor {
 public:
 
 	static Scene* createScene();
@@ -28,10 +28,20 @@ public:
 	void onSingleTouch();
 	void onDoubleTouch();
 
+	void generateTiles();
+
 	MainScene();
 	virtual ~MainScene();
 
 	TouchState* mTouchState;
+
+private:
+
+	Label* mTouchCountLabel;
+	int mTouchCount;
+	Size mScreenSize;
+	Node* mBaseGameNode;
+	int mLastTileCreatedIndex;
 };
 
 #endif /* SCENE_MAINSCENE_H_ */

@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "scene/MainScene.h"
+#include "Configs.h"
 
 USING_NS_CC;
 
@@ -31,6 +32,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("My Game");
         director->setOpenGLView(glview);
     }
+
+    // set scene resolution
+    glview->setDesignResolutionSize(WIDTH_RES, HEIGHT_RES, ResolutionPolicy::FIXED_WIDTH);
 
     // turn on display FPS
     director->setDisplayStats(true);

@@ -7,6 +7,8 @@
 
 #include "BadTile.h"
 
+const std::string BAD_TILE_FILE_NAME = "bad_tile.png";
+
 BadTile* BadTile::create() {
 	BadTile* badTile = new BadTile();
 	if (badTile && badTile->init()) {
@@ -15,6 +17,15 @@ BadTile* BadTile::create() {
 	}
 	CC_SAFE_DELETE(badTile);
 	return nullptr;
+}
+
+bool BadTile::init() {
+	if (Sprite::initWithFile(BAD_TILE_FILE_NAME)) {
+		// TODO
+
+		return true;
+	}
+	return false;
 }
 
 BadTile::BadTile() {
